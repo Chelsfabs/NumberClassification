@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Query
 from fastapi.responses import JSONResponse
 import requests
+from mangum import Mangum
 
 app = FastAPI()
 
@@ -57,3 +58,5 @@ def classify_number(number: int = Query(..., description="The number to classify
     return JSONResponse(status_code=200, content=response)
 
 # Run using: uvicorn filename:app --reload
+
+handler = Mangum(app)
